@@ -8,6 +8,7 @@
 </ion-header>
 
 <ion-content>
+  <!--
   <ion-card>
     <ion-card-content>
       <ion-grid>
@@ -25,6 +26,32 @@
           </ion-col>
           <ion-col size="4">
             <ion-icon class="chauffage-icons" name="aperture"></ion-icon>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card-content>
+  </ion-card>
+  -->
+  <ion-card>
+    <ion-card-content>
+      <ion-grid>
+        <ion-row>
+          <ion-col size="8">
+            <ion-item>
+              <ion-range  (ionChange)="heatingService.onPumpIntervalChanged($event)" min="0" max="100" step="1" [value]="heatingService.currentPumpIntervalSubject|async" color="danger" class="hydrated ion-color ion-color-danger ios in-item range-pressed">
+                <ion-icon slot="start" size="small" color="danger" name="thermometer" role="img" class="ios ion-color ion-color-danger icon-small hydrated" aria-label="thermometer"></ion-icon>
+                <ion-icon slot="end" color="danger" name="thermometer" role="img" class="ios ion-color ion-color-danger hydrated" aria-label="thermometer"></ion-icon>
+              </ion-range>
+            </ion-item>
+          </ion-col>
+          <ion-col *ngIf="heatingService.currentPumpIntervalSubject|async" size="4">
+            <ion-icon *ngIf="(heatingService.currentPumpIntervalSubject|async).isZero" class="chauffage-icons" name="aperture" color="abcd0"></ion-icon>
+            <ion-icon *ngIf="(heatingService.currentPumpIntervalSubject|async).isBelow20" class="chauffage-icons" name="aperture" color="abcdless20"></ion-icon>
+            <ion-icon *ngIf="(heatingService.currentPumpIntervalSubject|async).isBelow40" class="chauffage-icons" name="aperture" color="abcdless40"></ion-icon>
+            <ion-icon *ngIf="(heatingService.currentPumpIntervalSubject|async).isBelow60" class="chauffage-icons" name="aperture" color="abcdless60"></ion-icon>
+            <ion-icon *ngIf="(heatingService.currentPumpIntervalSubject|async).isBelow80" class="chauffage-icons" name="aperture" color="abcdless80"></ion-icon>
+            <ion-icon *ngIf="(heatingService.currentPumpIntervalSubject|async).isBelow100" class="chauffage-icons" name="aperture" color="abcdless100"></ion-icon>
+            <ion-icon *ngIf="(heatingService.currentPumpIntervalSubject|async).is100" class="chauffage-icons" name="aperture" color="abcd100"></ion-icon>
           </ion-col>
         </ion-row>
       </ion-grid>

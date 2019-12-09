@@ -1,0 +1,12 @@
+
+
+export interface PumpIntervalValues {
+    value: number;
+    isZero: boolean;
+    isBelow20: boolean;
+    isBelow40: boolean;
+    isBelow60: boolean;
+    isBelow80: boolean;
+    isBelow100: boolean;
+    is100: boolean;
+}

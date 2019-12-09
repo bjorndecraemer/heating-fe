@@ -9,3 +9,26 @@
   font-size: 64px!important;
 }
 
+
+.ion-color-abcd100 {
+  --ion-color-base: var(--ion-color-abcd100, #ff0000) !important;
+}
+.ion-color-abcdless100 {
+  --ion-color-base: var(--ion-color-abcd100, #ff0000) !important;
+}
+.ion-color-abcdless80 {
+  --ion-color-base: var(--ion-color-abcd80, rgba(221, 52, 52, 0.95)) !important;
+}
+.ion-color-abcdless60 {
+   --ion-color-base: var(--ion-color-abcd60, rgba(170, 55, 55, 0.79)) !important;
+ }
+.ion-color-abcdless40 {
+  --ion-color-base: var(--ion-color-abcd60, rgba(141, 46, 46, 0.59)) !important;
+}
+.ion-color-abcdless20 {
+  --ion-color-base: var(--ion-color-abcd60, rgba(106, 35, 35, 0.62)) !important;
+}
+.ion-color-abcd0 {
+  --ion-color-base: var(--ion-color-abcd60, rgba(101, 99, 92, 0.97)) !important;
+}
+

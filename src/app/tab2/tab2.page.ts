@@ -1,6 +1,6 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {HeatingService} from '../services/heating.service';
-import {interval} from 'rxjs';
+import {interval, Subject} from 'rxjs';
 
 @Component({
   selector: 'app-tab2',
