@@ -1,90 +1,91 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>
-      <span>Configure boiler</span>
-      <span><ion-spinner name="dots" *ngIf="heatingService.loadingSubject|async" class="ion-float-right"></ion-spinner></span>
-    </ion-title>
-  </ion-toolbar>
+    <ion-toolbar>
+        <ion-title>
+            <span>Configure boiler</span>
+            <span><ion-spinner name="dots" *ngIf="heatingService.loadingSubject|async"
+                               class="ion-float-right"></ion-spinner></span>
+        </ion-title>
+    </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-card>
-    <ion-card-content>
-      <ion-grid>
-        <ion-row>
-          <ion-col size="12">
-            <ion-item>
-              <ion-label>Current Temp</ion-label>
-              <ion-badge color="danger" slot="end">{{heatingService.tempSubject|async}}C</ion-badge>
-            </ion-item>
-          </ion-col>
-          <ion-col size="12">
-            <ion-item>
-              <ion-label>Humidity</ion-label>
-              <ion-badge color="secondary" slot="end">{{heatingService.humiditySubject|async}}%</ion-badge>
-            </ion-item>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
-    </ion-card-content>
-  </ion-card>
-  <ion-card>
-    <ion-card-content>
-      <ion-grid>
-        <ion-row *ngIf="heatingService.pumpSubject|async">
-          <ion-col size="8">
-            <ion-button (click)="onPumpDeactivate()" color="danger">De-activate pump</ion-button>
-          </ion-col>
-          <ion-col size="4">
-            <ion-icon class="chauffage-icons" name="aperture" color="secondary"></ion-icon>
-          </ion-col>
-        </ion-row>
-        <ion-row *ngIf="!(heatingService.pumpSubject|async)">
-          <ion-col size="8">
-            <ion-button  (click)="onPumpActivate()" color="light" >Activate pump</ion-button>
-          </ion-col>
-          <ion-col size="4">
-            <ion-icon class="chauffage-icons" name="aperture"></ion-icon>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
-    </ion-card-content>
-  </ion-card>
-  <ion-card>
-    <ion-card-content>
-      <ion-grid>
-        <ion-row *ngIf="heatingService.burnerSubject|async">
-          <ion-col size="8">
-            <ion-button (click)="onBurnerDeactivate()" color="danger">De-activate burner</ion-button>
-          </ion-col>
-          <ion-col size="4">
-            <ion-icon class="chauffage-icons" name="flame" color="danger"></ion-icon>
-          </ion-col>
-        </ion-row>
-        <ion-row *ngIf="!(heatingService.burnerSubject|async)">
-          <ion-col size="8">
-            <ion-button (click)="onBurnerActivate()" color="light">Activate burner</ion-button>
-          </ion-col>
-          <ion-col size="4">
-            <ion-icon class="chauffage-icons" name="flame"></ion-icon>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
-    </ion-card-content>
-  </ion-card>
-<!--  <ion-card>-->
-<!--    <ion-card-content>-->
-<!--      <ion-list>-->
-<!--        <ion-item>-->
-<!--          <ion-label>Pump</ion-label>-->
-<!--          <ion-toggle color="success"></ion-toggle>-->
-<!--        </ion-item>-->
+    <ion-card>
+        <ion-card-content>
+            <ion-grid>
+                <ion-row>
+                    <ion-col size="12">
+                        <ion-item>
+                            <ion-label>Current Temp</ion-label>
+                            <ion-badge color="danger" slot="end">{{heatingService.tempSubject|async}}C</ion-badge>
+                        </ion-item>
+                    </ion-col>
+                    <ion-col size="12">
+                        <ion-item>
+                            <ion-label>Humidity</ion-label>
+                            <ion-badge color="secondary" slot="end">{{heatingService.humiditySubject|async}}%
+                            </ion-badge>
+                        </ion-item>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+        </ion-card-content>
+    </ion-card>
 
-<!--        <ion-item>-->
-<!--          <ion-label>Burner</ion-label>-->
-<!--          <ion-toggle (ionChange)="onBurnerSwitch($event)" color="success"></ion-toggle>-->
-<!--        </ion-item>-->
-<!--      </ion-list>-->
-<!--    </ion-card-content>-->
-<!--  </ion-card>-->
+    <ion-card *ngIf="heatingService.manualSubject|async">
+        <ion-button (click)="onManualDisable()" color="light">Auto</ion-button>
+        <ion-card-content>
+            <ion-grid>
+                <ion-row *ngIf="heatingService.pumpSubject|async">
+                    <ion-col size="8">
+                        <ion-button (click)="onPumpDeactivate()" color="danger">De-activate pump</ion-button>
+                    </ion-col>
+                    <ion-col size="4">
+                        <ion-icon class="chauffage-icons" name="aperture" color="secondary"></ion-icon>
+                    </ion-col>
+                </ion-row>
+                <ion-row *ngIf="!(heatingService.pumpSubject|async)">
+                    <ion-col size="8">
+                        <ion-button (click)="onPumpActivate()" color="light">Activate pump</ion-button>
+                    </ion-col>
+                    <ion-col size="4">
+                        <ion-icon class="chauffage-icons" name="aperture"></ion-icon>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+        </ion-card-content>
+    </ion-card>
+    <ion-card *ngIf="heatingService.manualSubject|async">
+    <ion-card-content>
+        <ion-grid>
+            <ion-row *ngIf="heatingService.burnerSubject|async">
+                <ion-col size="8">
+                    <ion-button (click)="onBurnerDeactivate()" color="danger">De-activate burner</ion-button>
+                </ion-col>
+                <ion-col size="4">
+                    <ion-icon class="chauffage-icons" name="flame" color="danger"></ion-icon>
+                </ion-col>
+            </ion-row>
+            <ion-row *ngIf="!(heatingService.burnerSubject|async)">
+                <ion-col size="8">
+                    <ion-button (click)="onBurnerActivate()" color="light">Activate burner</ion-button>
+                </ion-col>
+                <ion-col size="4">
+                    <ion-icon class="chauffage-icons" name="flame"></ion-icon>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+    </ion-card-content>
+</ion-card>
+    <ion-card *ngIf="!(heatingService.manualSubject|async)">
+        <ion-button (click)="onManualEnable()" color="light">Manual</ion-button>
+        <ion-card-content>
+            <ion-grid>
+                <ion-row>
+                    <ion-col size="8" [offset]="2">
+                        TO BE IMPLEMENTED
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+        </ion-card-content>
+    </ion-card>
 </ion-content>

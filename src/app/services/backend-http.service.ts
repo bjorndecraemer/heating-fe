@@ -6,53 +6,64 @@ import {Observable} from 'rxjs';
   providedIn: 'root'
 })
 export class BackendHttpService {
-
-  private baseUrl = 'http://192.168.1.30:8080/api/fecontrol/';
-  // private baseUrl: string = "http://localhost:8080/api/fecontrol/"
+    private baseUrl = 'http://192.168.1.30:8080/api/fecontrol/';
+  // private baseUrl = 'http://localhost:8080/api/fecontrol/';
   private pumpEndpoint = 'pump';
   private burnerEndpoint = 'burner';
   private heatingEndpoint = 'heating';
   private humidityEndpoint = 'humidity';
   private tempEndpoint = 'temp';
+  private manualEndPoint = 'manual';
 
   constructor(private http: HttpClient) { }
 
-  public activateBurner(): Observable<Object> {
+  public activateBurner(): Observable<object> {
     return this.http.put(this.baseUrl + this.burnerEndpoint + '?setting=true', '');
   }
 
-  public deactivateBurner(): Observable<Object> {
+  public deactivateBurner(): Observable<object> {
     return this.http.put(this.baseUrl + this.burnerEndpoint + '?setting=false', '');
   }
 
-  public activateHeating(): Observable<Object> {
+  public activateHeating(): Observable<object> {
     return this.http.put(this.baseUrl + this.heatingEndpoint + '?setting=true', '');
   }
 
-  public deactivateHeating(): Observable<Object> {
+  public deactivateHeating(): Observable<object> {
     return this.http.put(this.baseUrl + this.heatingEndpoint + '?setting=false', '');
   }
 
-  public activatePump(): Observable<Object> {
+  public activatePump(): Observable<object> {
     return this.http.put(this.baseUrl + this.pumpEndpoint + '?setting=true', '');
   }
 
-  public deactivatePump(): Observable<Object> {
+  public deactivatePump(): Observable<object> {
     return this.http.put(this.baseUrl + this.pumpEndpoint + '?setting=false', '');
   }
+  public deactivateManual(): Observable<object> {
+    return this.http.put(this.baseUrl + this.manualEndPoint + '?setting=false', '');
+  }
 
-  public getPumpStatus(): Observable<Object> {
+    public activateManual(): Observable<object> {
+        return this.http.put(this.baseUrl + this.manualEndPoint + '?setting=true', '');
+    }
+
+  public getPumpStatus(): Observable<object> {
     return this.http.get(this.baseUrl + this.pumpEndpoint);
   }
-  public getBurnerStatus(): Observable<Object> {
+  public getBurnerStatus(): Observable<object> {
     return this.http.get(this.baseUrl + this.burnerEndpoint);
   }
 
-  public getTemperature(): Observable<Object> {
+  public getTemperature(): Observable<object> {
     return this.http.get(this.baseUrl + this.tempEndpoint);
   }
 
-  public getHumidity(): Observable<Object> {
+  public getHumidity(): Observable<object> {
     return this.http.get(this.baseUrl + this.humidityEndpoint);
+  }
+
+  public getManualStatus(): Observable<object> {
+      return this.http.get(this.baseUrl + this.manualEndPoint);
   }
 }

@@ -13,6 +13,7 @@ export class HeatingService {
   public loadingSubject: Subject<Boolean> = new Subject();
   public tempSubject: Subject<string> = new Subject<string>();
   public humiditySubject: Subject<string> = new Subject<string>();
+  public manualSubject: Subject<Boolean> = new Subject();
 
   constructor(private backendHttpService: BackendHttpService) {
     this.loadingSubject.next(false);
@@ -20,6 +21,7 @@ export class HeatingService {
     this.getBurnerStatus();
     this.getTempStatus();
     this.getHumidityStatus();
+    this.getManualStatus();
   }
 
   public activateBurner() {
@@ -41,23 +43,33 @@ export class HeatingService {
     this.backendHttpService.deactivatePump().subscribe(() => this.pumpSubject.next(false));
   }
 
+  public deactivateManual() {
+    this.backendHttpService.deactivateManual().subscribe(() => this.manualSubject.next(false));
+  }
+
+  public activateManual() {
+    this.backendHttpService.activateManual().subscribe(() => this.manualSubject.next(true));
+    this.triggerStatusUpdate();
+  }
+
   public triggerStatusUpdate() {
     this.loadingSubject.next(true);
     this.getPumpStatus().pipe(
         flatMap(() => this.getBurnerStatus()),
         flatMap(() => this.getTempStatus()),
-        flatMap(() => this.getHumidityStatus())
+        flatMap(() => this.getHumidityStatus()),
+        flatMap(() => this.getManualStatus())
     )
         .subscribe(() => this.loadingSubject.next(false));
     // forkJoin(this.getPumpStatus(), this.getBurnerStatus, () => {}).subscribe(()=> this.loadingSubject.next(false));
   }
 
   private getPumpStatus(): Observable<void> {
-    return this.backendHttpService.getPumpStatus().pipe(map((res: boolean) => this.pumpSubject.next(res)));
+    return this.backendHttpService.getPumpStatus().pipe(map((res: Boolean) => this.pumpSubject.next(res)));
   }
 
   private getBurnerStatus(): Observable<void> {
-    return this.backendHttpService.getBurnerStatus().pipe(map((res: boolean) => this.burnerSubject.next(res)));
+    return this.backendHttpService.getBurnerStatus().pipe(map((res: Boolean) => this.burnerSubject.next(res)));
   }
 
   private getTempStatus(): Observable<void> {
@@ -66,5 +78,9 @@ export class HeatingService {
 
   private getHumidityStatus(): Observable<void> {
     return this.backendHttpService.getHumidity().pipe(map((res: string) => this.humiditySubject.next(res)));
+  }
+
+  private getManualStatus(): Observable<void> {
+    return this.backendHttpService.getManualStatus().pipe(map((res: Boolean) => this.manualSubject.next(res)));
   }
 }
