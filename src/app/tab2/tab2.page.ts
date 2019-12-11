@@ -15,7 +15,7 @@ export class Tab2Page implements OnInit, OnDestroy{
 
   public ngOnInit(){
     this.heatingService.triggerStatusUpdate();
-    this.$secondsCounterObservable = interval(5000).subscribe(()=> {this.heatingService.triggerStatusUpdate()})
+    this.$secondsCounterObservable = interval(10000).subscribe(()=> {this.heatingService.triggerStatusUpdate()})
   }
 
   public ngOnDestroy(): void {
