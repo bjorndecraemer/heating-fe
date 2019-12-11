@@ -11,6 +11,26 @@
   <ion-card>
     <ion-card-content>
       <ion-grid>
+        <ion-row>
+          <ion-col size="12">
+            <ion-item>
+              <ion-label>Current Temp</ion-label>
+              <ion-badge color="danger" slot="end">{{heatingService.tempSubject|async}}C</ion-badge>
+            </ion-item>
+          </ion-col>
+          <ion-col size="12">
+            <ion-item>
+              <ion-label>Humidity</ion-label>
+              <ion-badge color="secondary" slot="end">{{heatingService.humiditySubject|async}}%</ion-badge>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card-content>
+  </ion-card>
+  <ion-card>
+    <ion-card-content>
+      <ion-grid>
         <ion-row *ngIf="heatingService.pumpSubject|async">
           <ion-col size="8">
             <ion-button (click)="onPumpDeactivate()" color="danger">De-activate pump</ion-button>
