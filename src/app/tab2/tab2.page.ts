@@ -10,6 +10,7 @@ import {interval} from 'rxjs';
 export class Tab2Page implements OnInit, OnDestroy {
   private $secondsCounterObservable;
   private burnerActive = false;
+  private knobValues = 0;
 
   constructor(private heatingService: HeatingService) {}
 
@@ -52,4 +53,7 @@ public onManualEnable() {
     console.log('checked = ' + isChecked);
   }
 
+    public onSliderChanged() {
+        console.log('Current debounced value = ' + this.knobValues);
+    }
 }
