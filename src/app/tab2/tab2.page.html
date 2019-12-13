@@ -84,8 +84,15 @@
                     <ion-col size="12">
                         <ion-list>
                             <ion-item>
-                                <ion-badge>{{knobValues}}</ion-badge>
-                                <ion-range [(ngModel)]="knobValues" (ionChange)="onSliderChanged()" debounce="500" min="0" max="30" step="1" value="10" snaps color="danger">
+                                <ion-badge [color]="sliderBadgeColor">{{knobLabel}}</ion-badge>
+                                <ion-range [(ngModel)]="knobValues"
+                                           (ionChange)="onSliderChanged()"
+                                           debounce="500"
+                                           min="0"
+                                           max="30"
+                                           step="1"
+                                           value="10"
+                                           [color]="sliderBadgeColor">
                                     <ion-icon slot="start" size="small" color="danger" name="thermometer"></ion-icon>
                                     <ion-icon slot="end" color="danger" name="thermometer"></ion-icon>
                                 </ion-range>

@@ -11,12 +11,14 @@ export class Tab2Page implements OnInit, OnDestroy {
   private $secondsCounterObservable;
   private burnerActive = false;
   private knobValues = 0;
+  private knobLabel = 'Off';
+  private sliderBadgeColor = 'danger';
 
   constructor(private heatingService: HeatingService) {}
 
   public ngOnInit() {
     this.heatingService.triggerStatusUpdate();
-    this.$secondsCounterObservable = interval(10000).subscribe(() => {this.heatingService.triggerStatusUpdate(); });
+    this.$secondsCounterObservable = interval(5000).subscribe(() => {this.heatingService.triggerStatusUpdate(); });
   }
 
   public ngOnDestroy(): void {
@@ -55,5 +57,12 @@ public onManualEnable() {
 
     public onSliderChanged() {
         console.log('Current debounced value = ' + this.knobValues);
+        if (this.knobValues === 0) {
+            this.sliderBadgeColor = 'medium';
+            this.knobLabel = 'off';
+        } else {
+            this.sliderBadgeColor = 'danger';
+            this.knobLabel = `${this.knobValues}`;
+        }
     }
 }

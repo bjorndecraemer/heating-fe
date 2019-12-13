@@ -11,8 +11,8 @@ export class HeatingService {
   public burnerSubject: Subject<Boolean> = new Subject();
   public pumpSubject: Subject<Boolean> = new Subject();
   public loadingSubject: Subject<Boolean> = new Subject();
-  public tempSubject: Subject<string> = new Subject<string>();
-  public humiditySubject: Subject<string> = new Subject<string>();
+  public tempSubject: Subject<string> = new Subject();
+  public humiditySubject: Subject<string> = new Subject();
   public manualSubject: Subject<Boolean> = new Subject();
 
   constructor(private backendHttpService: BackendHttpService) {
@@ -73,11 +73,11 @@ export class HeatingService {
   }
 
   private getTempStatus(): Observable<void> {
-    return this.backendHttpService.getTemperature().pipe(map((res: string) => this.tempSubject.next(res)));
+    return this.backendHttpService.getTemperature().pipe(map((res: object) => this.tempSubject.next('' + res)));
   }
 
   private getHumidityStatus(): Observable<void> {
-    return this.backendHttpService.getHumidity().pipe(map((res: string) => this.humiditySubject.next(res)));
+    return this.backendHttpService.getHumidity().pipe(map((res: object) => this.humiditySubject.next('' + res)));
   }
 
   private getManualStatus(): Observable<void> {

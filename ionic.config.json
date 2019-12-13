@@ -1,5 +1,7 @@
 {
   "name": "heating-fe",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }
